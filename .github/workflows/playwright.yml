@@ -17,6 +17,9 @@ jobs:
       run: npm ci
     - name: Install Playwright Browsers
       run: npx playwright install --with-deps
+    - name: Criar .env
+      run: |
+        echo "${{ secrets.STAGING }}" > .env
     - name: Run Playwright tests
       run: npx playwright test
     - uses: actions/upload-artifact@v4

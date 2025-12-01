@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 import { qase } from 'playwright-qase-reporter';
-import { apiConfig, loadPayload } from '../../utils/api-confing.js';
+import { apiConfig, loadPayload } from '../../utils/api-config.js';
 import path from 'path';
 
 
@@ -14,6 +14,7 @@ test.describe('Qualification Rule Service - lead endpoint', () => {
             payload.utmSource = "Tiktok";
             payload.utmCampaign = "-whatsapp";
 
+            consele.log(apiConfig)
             const response = await request.post(`${apiConfig.baseURLQualificationRuleSTG}/lead`, {
                 headers: {
                     'Content-Type': 'application/json',
