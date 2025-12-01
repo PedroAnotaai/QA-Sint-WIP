@@ -1,0 +1,9 @@
+{
+  "event": "notification",
+  "type": "active_contact",
+  "content": {
+    "phone": "5524981347057",
+    "crm_db_id": "414141",
+    "deal_id": "33415446"
+  }
+}

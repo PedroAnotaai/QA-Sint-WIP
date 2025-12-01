@@ -1,0 +1,7 @@
+{
+    "email": "{{randomEmail}}",
+    "companyName": "Teste 123",
+    "hasComputer": true,
+    "orderDay": "maior que 10",
+    "isFit": true
+  }
