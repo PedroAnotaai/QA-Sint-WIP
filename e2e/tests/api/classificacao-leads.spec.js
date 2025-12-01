@@ -14,7 +14,7 @@ test.describe('Qualification Rule Service - lead endpoint', () => {
             payload.utmSource = "Tiktok";
             payload.utmCampaign = "-whatsapp";
 
-            consele.log(apiConfig)
+            console.log(apiConfig)
             const response = await request.post(`${apiConfig.baseURLQualificationRuleSTG}/lead`, {
                 headers: {
                     'Content-Type': 'application/json',
