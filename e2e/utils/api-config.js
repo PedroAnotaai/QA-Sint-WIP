@@ -3,7 +3,7 @@ import fs from 'fs';
 import path from 'path';
 import dotenv from 'dotenv';
 
-dotenv.config({ path: path.resolve(process.cwd(), ".env")});
+dotenv.config({ path: path.resolve(process.cwd(),".env")});
 
 const cleanEnvVar = (value) => {
   if (!value) return undefined;
