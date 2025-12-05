@@ -388,7 +388,7 @@ test.describe('Qualification Rule Service - lead endpoint', () => {
             const responseBody = await response.json();
             console.log(JSON.stringify(responseBody));
             expect(response.status()).toBe(201);
-            expect(responseBody).toHaveProperty('leadType', 'SQL_APP');
+            expect(responseBody).toHaveProperty('leadType', 'SQL APP');
             expect(responseBody).toHaveProperty('qualificationRule', 'Curadoria');
             expect(responseBody).toHaveProperty('leadOrigin', 'Curadoria');
             expect(responseBody).toHaveProperty('tierQualification', '');
@@ -409,7 +409,7 @@ test.describe('Qualification Rule Service - lead endpoint', () => {
             const responseBody = await response.json();
             console.log(JSON.stringify(responseBody));
             expect(response.status()).toBe(201);
-            expect(responseBody).toHaveProperty('leadType', 'SQL_APP');
+            expect(responseBody).toHaveProperty('leadType', 'SQL APP');
             expect(responseBody).toHaveProperty('qualificationRule', 'Organico');
             expect(responseBody).toHaveProperty('leadOrigin', 'Orgânico Direto');
             expect(responseBody).toHaveProperty('tierQualification', 'Gold_D0');
@@ -432,7 +432,7 @@ test.describe('Qualification Rule Service - lead endpoint', () => {
             const responseBody = await response.json();
             console.log(JSON.stringify(responseBody));
             expect(response.status()).toBe(201);
-            expect(responseBody).toHaveProperty('leadType', 'SQL_APP');
+            expect(responseBody).toHaveProperty('leadType', 'SQL APP');
             expect(responseBody).toHaveProperty('qualificationRule', 'Institucional');
             expect(responseBody).toHaveProperty('leadOrigin', 'Outros');
             expect(responseBody).toHaveProperty('tierQualification', 'Gold_D0');
@@ -454,7 +454,7 @@ test.describe('Qualification Rule Service - lead endpoint', () => {
             const responseBody = await response.json();
             console.log(JSON.stringify(responseBody));
             expect(response.status()).toBe(201);
-            expect(responseBody).toHaveProperty('leadType', 'SQL_APP');
+            expect(responseBody).toHaveProperty('leadType', 'SQL APP');
             expect(responseBody).toHaveProperty('qualificationRule', 'Indicado');
             expect(responseBody).toHaveProperty('leadOrigin', 'Indique e Ganhe');
             expect(responseBody).toHaveProperty('tierQualification', 'Gold_D0');
@@ -476,7 +476,7 @@ test.describe('Qualification Rule Service - lead endpoint', () => {
             const responseBody = await response.json();
             console.log(JSON.stringify(responseBody));
             expect(response.status()).toBe(201);
-            expect(responseBody).toHaveProperty('leadType', 'SQL_APP');
+            expect(responseBody).toHaveProperty('leadType', 'SQL APP');
             expect(responseBody).toHaveProperty('qualificationRule', 'Parceiro(partner)');
             expect(responseBody).toHaveProperty('leadOrigin', 'Parceiro');
             expect(responseBody).toHaveProperty('tierQualification', 'Gold_D0');
@@ -498,7 +498,7 @@ test.describe('Qualification Rule Service - lead endpoint', () => {
             const responseBody = await response.json();
             console.log(JSON.stringify(responseBody));
             expect(response.status()).toBe(201);
-            expect(responseBody).toHaveProperty('leadType', 'SQL_APP');
+            expect(responseBody).toHaveProperty('leadType', 'SQL APP');
             expect(responseBody).toHaveProperty('qualificationRule', 'Indicado');
             expect(responseBody).toHaveProperty('leadOrigin', 'Indique e Ganhe');
             expect(responseBody).toHaveProperty('tierQualification', 'Gold_D0');
@@ -520,7 +520,7 @@ test.describe('Qualification Rule Service - lead endpoint', () => {
             const responseBody = await response.json();
             console.log(JSON.stringify(responseBody));
             expect(response.status()).toBe(201);
-            expect(responseBody).toHaveProperty('leadType', 'SQL_APP');
+            expect(responseBody).toHaveProperty('leadType', 'SQL APP');
             expect(responseBody).toHaveProperty('qualificationRule', 'Social');
             expect(responseBody).toHaveProperty('leadOrigin', 'Facebook Social');
             expect(responseBody).toHaveProperty('tierQualification', '');
@@ -528,7 +528,7 @@ test.describe('Qualification Rule Service - lead endpoint', () => {
     );
 
     qase(104,
-        test('', async ({ request }) => {
+        test('[SQL APP] Secundário: Social || Facebook Ads - Social (utmCampaign: button, utmSource: facebook)', async ({ request }) => {
             const payload = loadPayload('e2e/fixtures/payload-sql-app.json')
             payload.email = `${Math.random().toString(36).substring(2, 10)}@anota.ai`;
             payload.utmSource = 'facebook';
@@ -542,7 +542,7 @@ test.describe('Qualification Rule Service - lead endpoint', () => {
             const responseBody = await response.json();
             console.log(JSON.stringify(responseBody));
             expect(response.status()).toBe(201);
-            expect(responseBody).toHaveProperty('leadType', 'SQL_APP');
+            expect(responseBody).toHaveProperty('leadType', 'SQL APP');
             expect(responseBody).toHaveProperty('qualificationRule', 'Social');
             expect(responseBody).toHaveProperty('leadOrigin', 'Facebook Social');
             expect(responseBody).toHaveProperty('tierQualification', '');
@@ -563,7 +563,7 @@ test.describe('Qualification Rule Service - lead endpoint', () => {
             const responseBody = await response.json();
             console.log(JSON.stringify(responseBody));
             expect(response.status()).toBe(201);
-            expect(responseBody).toHaveProperty('leadType', 'SQL_APP');
+            expect(responseBody).toHaveProperty('leadType', 'SQL APP');
             expect(responseBody).toHaveProperty('qualificationRule', 'Social');
             expect(responseBody).toHaveProperty('leadOrigin', 'YouTube Social');
             expect(responseBody).toHaveProperty('tierQualification', '');
@@ -572,7 +572,7 @@ test.describe('Qualification Rule Service - lead endpoint', () => {
 
     qase(106,
         test('[MQL]', async ({ request }) => {
-            const payload = loadPayload('e2e/fixtures/payload-mql-app.json')
+            const payload = loadPayload('e2e/fixtures/payload-mql.json')
             payload.email = `${Math.random().toString(36).substring(2, 10)}@anota.ai`;
 
             const response = await request.post(`${apiConfig.baseURLQualificationRuleSTG}/lead`, {
@@ -605,7 +605,7 @@ test.describe('Qualification Rule Service - lead endpoint', () => {
             expect(responseBody).toHaveProperty('leadType', 'MQL APP');
         })
     );
-    
+
 
 
 
