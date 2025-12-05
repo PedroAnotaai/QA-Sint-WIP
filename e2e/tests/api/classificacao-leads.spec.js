@@ -372,6 +372,239 @@ test.describe('Qualification Rule Service - lead endpoint', () => {
         })
     );
 
+    qase(97,
+        test('[SQL APP] Secundário: Social || Curadoria - Curadoria)', async ({ request }) => {
+            const payload = loadPayload('e2e/fixtures/payload-sql-app.json')
+            payload.email = `${Math.random().toString(36).substring(2, 10)}@anota.ai`;
+            payload.utmMedium = 'curadoria';
+            payload.utmSource = 'instagram';
+            const response = await request.post(`${apiConfig.baseURLQualificationRuleSTG}/lead`, {
+            
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                data: payload,
+            });
+            const responseBody = await response.json();
+            console.log(JSON.stringify(responseBody));
+            expect(response.status()).toBe(201);
+            expect(responseBody).toHaveProperty('leadType', 'SQL_APP');
+            expect(responseBody).toHaveProperty('qualificationRule', 'Curadoria');
+            expect(responseBody).toHaveProperty('leadOrigin', 'Curadoria');
+            expect(responseBody).toHaveProperty('tierQualification', '');
+        })
+    );
+
+    qase(98,
+        test('[SQL APP] Secundário: Orgânico (utm_source: null)', async ({ request }) => {
+            const payload = loadPayload('e2e/fixtures/payload-sql-app.json')
+            payload.email = `${Math.random().toString(36).substring(2, 10)}@anota.ai`;
+            payload.utmSource = null;
+            const response = await request.post(`${apiConfig.baseURLQualificationRuleSTG}/lead`, {
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                data: payload,
+            });
+            const responseBody = await response.json();
+            console.log(JSON.stringify(responseBody));
+            expect(response.status()).toBe(201);
+            expect(responseBody).toHaveProperty('leadType', 'SQL_APP');
+            expect(responseBody).toHaveProperty('qualificationRule', 'Organico');
+            expect(responseBody).toHaveProperty('leadOrigin', 'Orgânico Direto');
+            expect(responseBody).toHaveProperty('tierQualification', 'Gold_D0');
+
+        })
+    );
+
+    qase(99,
+        test('[SQL APP] Secundário: Outros - Institucional', async ({ request }) => {
+            const payload = loadPayload('e2e/fixtures/payload-sql-app.json')
+            payload.email = `${Math.random().toString(36).substring(2, 10)}@anota.ai`;
+            payload.utmSource = "bing";
+            payload.utmTerm = "anota";
+            const response = await request.post(`${apiConfig.baseURLQualificationRuleSTG}/lead`, {
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                data: payload,
+            });
+            const responseBody = await response.json();
+            console.log(JSON.stringify(responseBody));
+            expect(response.status()).toBe(201);
+            expect(responseBody).toHaveProperty('leadType', 'SQL_APP');
+            expect(responseBody).toHaveProperty('qualificationRule', 'Institucional');
+            expect(responseBody).toHaveProperty('leadOrigin', 'Outros');
+            expect(responseBody).toHaveProperty('tierQualification', 'Gold_D0');
+        })
+    );
+
+    qase(100,
+        test('[SQL APP] Secundário: Outros || Indique e Ganhe - Indicado', async ({ request }) => {
+            const payload = loadPayload('e2e/fixtures/payload-sql-app.json')
+            payload.email = `${Math.random().toString(36).substring(2, 10)}@anota.ai`;
+            payload.utmSource = 'bing';
+            payload.isIndicated = 'true';
+            const response = await request.post(`${apiConfig.baseURLQualificationRuleSTG}/lead`, {
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                data: payload,
+            });
+            const responseBody = await response.json();
+            console.log(JSON.stringify(responseBody));
+            expect(response.status()).toBe(201);
+            expect(responseBody).toHaveProperty('leadType', 'SQL_APP');
+            expect(responseBody).toHaveProperty('qualificationRule', 'Indicado');
+            expect(responseBody).toHaveProperty('leadOrigin', 'Indique e Ganhe');
+            expect(responseBody).toHaveProperty('tierQualification', 'Gold_D0');
+        })
+    );
+
+    qase(101,
+        test('[SQL APP] Secundário: Outros || Parceiro Orgânico', async ({ request }) => {
+            const payload = loadPayload('e2e/fixtures/payload-sql-app.json')
+            payload.email = `${Math.random().toString(36).substring(2, 10)}@anota.ai`;
+            payload.utmSource = 'bing';
+            payload.partner = 'ifood';
+            const response = await request.post(`${apiConfig.baseURLQualificationRuleSTG}/lead`, {
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                data: payload,
+            });
+            const responseBody = await response.json();
+            console.log(JSON.stringify(responseBody));
+            expect(response.status()).toBe(201);
+            expect(responseBody).toHaveProperty('leadType', 'SQL_APP');
+            expect(responseBody).toHaveProperty('qualificationRule', 'Parceiro(partner)');
+            expect(responseBody).toHaveProperty('leadOrigin', 'Parceiro');
+            expect(responseBody).toHaveProperty('tierQualification', 'Gold_D0');
+        })
+    );
+
+    qase(102,
+        test('[SQL APP] Secundário: Social || Instagram Ads - Indicado', async ({ request }) => {
+            const payload = loadPayload('e2e/fixtures/payload-sql-app.json')
+            payload.email = `${Math.random().toString(36).substring(2, 10)}@anota.ai`;
+            payload.utmSource = 'ig';
+            payload.isIndicated = 'true';
+            const response = await request.post(`${apiConfig.baseURLQualificationRuleSTG}/lead`, {
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                data: payload,
+            });
+            const responseBody = await response.json();
+            console.log(JSON.stringify(responseBody));
+            expect(response.status()).toBe(201);
+            expect(responseBody).toHaveProperty('leadType', 'SQL_APP');
+            expect(responseBody).toHaveProperty('qualificationRule', 'Indicado');
+            expect(responseBody).toHaveProperty('leadOrigin', 'Indique e Ganhe');
+            expect(responseBody).toHaveProperty('tierQualification', 'Gold_D0');
+        })
+    );
+
+    qase(103,
+        test('[SQL APP] Secundário: Social || Facebook Ads - Social (utmCampaign: post, utmSource: fb)', async ({ request }) => {
+            const payload = loadPayload('e2e/fixtures/payload-sql-app.json')
+            payload.email = `${Math.random().toString(36).substring(2, 10)}@anota.ai`;
+            payload.utmSource = 'fb';
+            payload.utmCampaign = 'post';
+            const response = await request.post(`${apiConfig.baseURLQualificationRuleSTG}/lead`, {
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                data: payload,
+            });
+            const responseBody = await response.json();
+            console.log(JSON.stringify(responseBody));
+            expect(response.status()).toBe(201);
+            expect(responseBody).toHaveProperty('leadType', 'SQL_APP');
+            expect(responseBody).toHaveProperty('qualificationRule', 'Social');
+            expect(responseBody).toHaveProperty('leadOrigin', 'Facebook Social');
+            expect(responseBody).toHaveProperty('tierQualification', '');
+        })
+    );
+
+    qase(104,
+        test('', async ({ request }) => {
+            const payload = loadPayload('e2e/fixtures/payload-sql-app.json')
+            payload.email = `${Math.random().toString(36).substring(2, 10)}@anota.ai`;
+            payload.utmSource = 'facebook';
+            payload.utmCampaign = 'button';
+            const response = await request.post(`${apiConfig.baseURLQualificationRuleSTG}/lead`, {
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                data: payload,
+            });
+            const responseBody = await response.json();
+            console.log(JSON.stringify(responseBody));
+            expect(response.status()).toBe(201);
+            expect(responseBody).toHaveProperty('leadType', 'SQL_APP');
+            expect(responseBody).toHaveProperty('qualificationRule', 'Social');
+            expect(responseBody).toHaveProperty('leadOrigin', 'Facebook Social');
+            expect(responseBody).toHaveProperty('tierQualification', '');
+        })
+    );
+
+    qase(105,
+        test('[SQL APP] Secundário: Outros - Social (youtube)', async ({ request }) => {
+            const payload = loadPayload('e2e/fixtures/payload-sql-app.json')
+            payload.email = `${Math.random().toString(36).substring(2, 10)}@anota.ai`;
+            payload.utmSource = 'youtube';
+            const response = await request.post(`${apiConfig.baseURLQualificationRuleSTG}/lead`, {
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                data: payload,
+            });
+            const responseBody = await response.json();
+            console.log(JSON.stringify(responseBody));
+            expect(response.status()).toBe(201);
+            expect(responseBody).toHaveProperty('leadType', 'SQL_APP');
+            expect(responseBody).toHaveProperty('qualificationRule', 'Social');
+            expect(responseBody).toHaveProperty('leadOrigin', 'YouTube Social');
+            expect(responseBody).toHaveProperty('tierQualification', '');
+        })
+    );
+
+    qase(106,
+        test('[MQL]', async ({ request }) => {
+            const payload = loadPayload('e2e/fixtures/payload-mql-app.json')
+            payload.email = `${Math.random().toString(36).substring(2, 10)}@anota.ai`;
+
+            const response = await request.post(`${apiConfig.baseURLQualificationRuleSTG}/lead`, {
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                data: payload,
+            });
+            const responseBody = await response.json();
+            console.log(JSON.stringify(responseBody));
+            expect(response.status()).toBe(201);
+            expect(responseBody).toHaveProperty('leadType', 'MQL');
+        })
+    );
+
+    qase(107,
+        test('[MQL APP]', async ({ request }) => {
+            const payload = loadPayload('e2e/fixtures/payload-mql-app.json')
+            payload.email = `${Math.random().toString(36).substring(2, 10)}@anota.ai`;
+
+            const response = await request.post(`${apiConfig.baseURLQualificationRuleSTG}/lead`, {
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                data: payload,
+            });
+            const responseBody = await response.json();
+            console.log(JSON.stringify(responseBody));
+            expect(response.status()).toBe(201);
+            expect(responseBody).toHaveProperty('leadType', 'MQL APP');
+        })
+    );
     
 
 
